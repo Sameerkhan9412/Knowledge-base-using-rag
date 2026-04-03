@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
 app.use("/api/upload", uploadRoutes);
 app.use("/api/chat", chatRoutes);
 
+
 // Global Error Handler
 app.use((err, req, res, next) => {
   console.error("Error:", err);
