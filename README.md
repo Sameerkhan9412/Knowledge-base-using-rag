@@ -1,11 +1,11 @@
-# 📄 PDF RAG App (Chat with Your PDFs)
+# Knowledge Based Search Engine (Chat with Your PDFs)
 
 An AI-powered full-stack application that allows users to upload PDFs and interact with them using natural language.
 The app uses **Retrieval-Augmented Generation (RAG)** to provide accurate answers from document content.
 
 ---
 
-## 🚀 Features
+## Features
 
 * Authentication using Clerk
 * Upload multiple PDFs
@@ -16,6 +16,10 @@ The app uses **Retrieval-Augmented Generation (RAG)** to provide accurate answer
 * LLM-powered answers (Grok / LLM APIs)
 
 ---
+
+## Demo Video
+
+[![Watch Demo](https://img.youtube.com/vi/_ZkGRNul-_4/0.jpg)](https://www.youtube.com/watch?v=_ZkGRNul-_4)
 
 ## Architecture
 
@@ -110,8 +114,8 @@ Final Answer → UI
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/pdf-rag-app.git
-cd pdf-rag-app
+git clone https://github.com/Sameerkhan9412/Knowledge-base-using-rag.git
+cd Knowledge-base-using-rag
 ```
 
 ---
@@ -154,7 +158,7 @@ cd client
 npm install
 ```
 
-#### Create `.env.local`
+#### Create `.env`
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
@@ -176,6 +180,13 @@ npm run dev
 ```bash
 redis-server
 ```
+or
+
+### Run Redis using docker (IMPORTANT)
+If redis is not installed locally, run using docker
+```
+docker run -d -p 6379:6379 --name redis redis
+```
 
 ---
 
@@ -184,6 +195,48 @@ redis-server
 * Dashboard UI
 * Chat UI
 * PDF Upload
+
+## Screenshots
+
+### Home Page
+
+<p align="center">
+  <img src="screenshots/home-1.png" width="45%" />
+  <img src="screenshots/home-2.png" width="45%" />
+</p>
+
+<p align="center">
+  <img src="screenshots/home-3.png" width="60%" />
+</p>
+
+---
+
+### Authentication (Login & Signup)
+
+<p align="center">
+  <img src="screenshots/auth-login.png" width="45%" />
+  <img src="screenshots/auth-signup.png" width="45%" />
+</p>
+
+---
+
+### Upload PDF Section
+
+<p align="center">
+  <img src="screenshots/upload-1.png" width="30%" />
+  <img src="screenshots/upload-2.png" width="30%" />
+  <img src="screenshots/upload-3.png" width="30%" />
+</p>
+
+---
+
+### Dashboard & Chat UI
+
+<p align="center">
+  <img src="screenshots/dashboard-1.png" width="45%" />
+  <img src="screenshots/dashboard-2.png" width="45%" />
+</p>
+
 
 ---
 
@@ -195,7 +248,7 @@ redis-server
 
 ---
 
-## 📌 Future Improvements
+## Future Improvements
 
 * Streaming responses (like ChatGPT)
 * PDF highlighting
