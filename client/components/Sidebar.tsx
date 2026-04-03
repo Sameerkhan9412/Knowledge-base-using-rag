@@ -8,7 +8,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     const fetchChats = async () => {
-      const res = await api.get(`http://localhost:5000/api/chat/history`);
+      const res = await api.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/history`);
       setChats(res.data);
     };
 

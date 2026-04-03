@@ -30,7 +30,7 @@ export default function ChatWindow() {
     setMessages((prev) => [...prev, userMessage]);
     console.log("conent", input, chatId);
     try {
-      const res = await api.post(`http://localhost:5000/api/chat`, {
+      const res = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
         query: input,
         chatId,
       });

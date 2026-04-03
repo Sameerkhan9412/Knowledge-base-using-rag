@@ -13,7 +13,7 @@ export default function ChatSidebar() {
     const fetchChats = async () => {
       try {
        const res = await api.get(
-          `http://localhost:5000/api/chat/history`,
+          `${process.env.NEXT_PUBLIC_API_URL}/chat/history`,
         );
         setChats(res.data);
       } catch (err) {

@@ -17,6 +17,10 @@ export const initQdrant = async () => {
       });
     }
 
+//     const info = await qdrant.getCollection(process.env.QDRANT_COLLECTION);
+// console.log("Collection info:", info);
+
+
     // ADD THIS (VERY IMPORTANT)
     await qdrant.createPayloadIndex(process.env.QDRANT_COLLECTION, {
       field_name: "userId",

@@ -42,9 +42,9 @@ connection.on("connect", () => {
 new Worker(
   "pdf-processing",
   async (job) => {
-    const { filePath, docId } = job.data;
+    const { filePath, docId,userId } = job.data;
     console.log("Processing:", filePath);
-    await processPDF(filePath, docId);
+    await processPDF(filePath, docId,userId);
   },
   { connection }
 );

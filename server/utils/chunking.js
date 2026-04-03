@@ -1,8 +1,18 @@
-export const chunkText = (text, size = 500, overlap = 50) => {
+export const chunkText = (text, chunkSize = 500, overlap = 100) => {
   const chunks = [];
 
-  for (let i = 0; i < text.length; i += size - overlap) {
-    chunks.push(text.slice(i, i + size));
+  let start = 0;
+
+  while (start < text.length) {
+    const end = start + chunkSize;
+
+    const chunk = text.slice(start, end);
+
+    if (chunk.trim().length > 0) {
+      chunks.push(chunk);
+    }
+
+    start += chunkSize - overlap;
   }
 
   return chunks;

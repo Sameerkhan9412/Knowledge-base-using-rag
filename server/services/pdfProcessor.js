@@ -1,41 +1,59 @@
 import fs from "fs";
-// import pdf from "pdf-parse";
 import { chunkText } from "../utils/chunking.js";
 import { getEmbedding } from "./embedding.js";
 import { qdrant } from "../config/qdrant.js";
 import Document from "../models/Document.js";
+import { extractTextFromPDF } from "../config/extractTextFromPDF.js";
+import { v4 as uuidv4 } from "uuid";
 
 const pdfParse = await import("pdf-parse");
-
 const pdf = pdfParse.default;
 
-export const processPDF = async (filePath, docId) => {
+export const processPDF = async (filePath, docId, userId) => {
   try {
-    const buffer = fs.readFileSync(filePath);
-    const data = await pdf(buffer);
+    console.log("📄 Processing:", filePath);
+    console.log("⏳ Starting PDF parse...");
+const text = await extractTextFromPDF(filePath);
+console.log("✅ PDF parsed");
 
-    const chunks = chunkText(data.text);
+console.log("Text length:", text.length);
+
+
+    const chunks = chunkText(text).slice(0, 20);
+console.log("Chunks:", chunks.length);
 
     for (let i = 0; i < chunks.length; i++) {
-      const embedding = await getEmbedding(chunks[i]);
+  const embedding = await getEmbedding(chunks[i]);
 
-      await qdrant.upsert(process.env.QDRANT_COLLECTION, {
-        points: [
-          {
-            id: `${docId}_${i}`,
-            vector: embedding,
-            payload: {
-              text: chunks[i],
-              docId,
-            },
+  console.log("🚀 Storing chunk:", i);
+
+  try {
+    const store = await qdrant.upsert(process.env.QDRANT_COLLECTION, {
+      points: [
+        {
+          id: uuidv4(),
+          vector: embedding,
+          payload: {
+            text: chunks[i],
+            docId,
+            userId,
           },
-        ],
-      });
-    }
+        },
+      ],
+    });
+
+    console.log("✅ Stored:", store);
+  } catch (err) {
+    console.error("Qdrant error:", err);
+  }
+}
 
     await Document.findByIdAndUpdate(docId, {
       status: "completed",
     });
+
+    console.log("PDF processing completed");
+
   } catch (error) {
     await Document.findByIdAndUpdate(docId, {
       status: "failed",
