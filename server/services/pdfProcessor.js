@@ -11,10 +11,10 @@ const pdf = pdfParse.default;
 
 export const processPDF = async (filePath, docId, userId) => {
   try {
-    console.log("📄 Processing:", filePath);
-    console.log("⏳ Starting PDF parse...");
+    console.log("Processing:", filePath);
+    console.log("Starting PDF parse...");
 const text = await extractTextFromPDF(filePath);
-console.log("✅ PDF parsed");
+console.log("PDF parsed");
 
 console.log("Text length:", text.length);
 
@@ -25,7 +25,7 @@ console.log("Chunks:", chunks.length);
     for (let i = 0; i < chunks.length; i++) {
   const embedding = await getEmbedding(chunks[i]);
 
-  console.log("🚀 Storing chunk:", i);
+  console.log("Storing chunk:", i);
 
   try {
     const store = await qdrant.upsert(process.env.QDRANT_COLLECTION, {
@@ -42,7 +42,7 @@ console.log("Chunks:", chunks.length);
       ],
     });
 
-    console.log("✅ Stored:", store);
+    console.log("Stored:", store);
   } catch (err) {
     console.error("Qdrant error:", err);
   }

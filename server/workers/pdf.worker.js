@@ -1,27 +1,3 @@
-// import { Worker } from "bullmq";
-// import IORedis from "ioredis";
-// import { processPDF } from "../services/pdfProcessor.js";
-// import dotenv from "dotenv"
-// dotenv.config();
-// console.log("redis port",process.env.REDIS_PORT)
-// const connection = new IORedis({
-//   host: process.env.REDIS_HOST,
-//   port: parseInt(process.env.REDIS_PORT, 10), // 🔥 FIX
-//   username: process.env.REDIS_USERNAME,
-//   password: process.env.REDIS_PASSWORD,
-//   tls: {},
-//   maxRetriesPerRequest: null, // 🔥 REQUIRED
-// });
-
-// new Worker(
-//   "pdf-processing",
-//   async (job) => {
-//     const { filePath, docId } = job.data;
-//     await processPDF(filePath, docId);
-//   },
-//   { connection }
-// );
-
 import dotenv from "dotenv";
 dotenv.config();
 

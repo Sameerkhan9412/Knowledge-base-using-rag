@@ -75,7 +75,7 @@ export default function DashboardLayout({
                 animate={{ opacity: 1 }}
                 className="font-bold text-lg gradient-text"
               >
-                PDF RAG
+                Paper Brain Ai
               </motion.span>
             )}
           </Link>
@@ -137,7 +137,7 @@ export default function DashboardLayout({
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
             <FileText className="w-4 h-4 text-background" />
           </div>
-          <span className="font-bold gradient-text">PDF RAG</span>
+          <span className="font-bold gradient-text">Paper Brain AI</span>
         </Link>
 
         <UserButton
@@ -176,7 +176,7 @@ export default function DashboardLayout({
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                     <FileText className="w-5 h-5 text-background" />
                   </div>
-                  <span className="font-bold text-lg gradient-text">PDF RAG</span>
+                  <span className="font-bold text-lg gradient-text">Paper Brain Ai</span>
                 </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}

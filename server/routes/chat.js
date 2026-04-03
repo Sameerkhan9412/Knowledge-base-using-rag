@@ -47,9 +47,7 @@ router.post("/", async (req, res) => {
  */
 router.get("/history", async (req, res) => {
   try {
-    console.log("user id")
     const userId = req.headers["x-user-id"] || "demo-user";
-    console.log("user id",userId)
 
     const chats = await getUserChats(userId);
 
