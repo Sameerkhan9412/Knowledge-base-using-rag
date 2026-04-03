@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useSearchParams } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState<any[]>([]);
@@ -10,6 +11,7 @@ export default function ChatWindow() {
 
   const searchParams = useSearchParams();
   const chatId = searchParams.get("chatId");
+  const user=useUser();
 
   // Load previous messages
   useEffect(() => {
@@ -33,6 +35,10 @@ export default function ChatWindow() {
       const res = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
         query: input,
         chatId,
+      },{
+        headers: {
+    "x-user-id": user?.id, // 🔥 important
+  },
       });
 
       const aiMessage = {
