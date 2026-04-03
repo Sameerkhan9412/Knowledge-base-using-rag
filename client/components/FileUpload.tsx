@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { api } from "@/lib/api";
+import { useUser } from "@clerk/nextjs";
 
 export default function FileUpload() {
   const [files, setFiles] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   const uploadFiles = async () => {
     if (!files) return;
@@ -22,6 +24,7 @@ export default function FileUpload() {
       // ✅ FIXED (NO hardcoded URL)
       await api.post(`${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
         headers: {
+          "x-user-id":user?.id,
           "Content-Type": "multipart/form-data",
         },
       });

@@ -16,51 +16,24 @@ export default function HomePage() {
   }
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center bg-gray-50">
-      
-      {/* Heading */}
-      <h1 className="text-4xl font-bold mb-4 text-center">
-        📄 PDF RAG Chat App
-      </h1>
+    <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-black to-gray-900 text-white">
 
-      {/* Subtext */}
-      <p className="text-gray-600 mb-6 text-center max-w-xl">
-        Upload your PDFs and chat with them using AI.  
-        Get instant answers powered by embeddings and vector search.
-      </p>
+  <h1 className="text-5xl font-bold mb-4">
+    Chat with your PDFs 📄
+  </h1>
 
-      {/* Buttons */}
-      <div className="flex gap-4">
-        {user ? (
-          <button
-            onClick={() => router.push("/dashboard")}
-            className="bg-black text-white px-6 py-2 rounded-lg"
-          >
-            Go to Dashboard 🚀
-          </button>
-        ) : (
-          <>
-            <button
-              onClick={() => router.push("/sign-in")}
-              className="bg-black text-white px-6 py-2 rounded-lg"
-            >
-              Sign In
-            </button>
+  <p className="text-gray-400 mb-6 text-center max-w-lg">
+    AI-powered PDF assistant using RAG, Grok & Qdrant
+  </p>
 
-            <button
-              onClick={() => router.push("/sign-up")}
-              className="border px-6 py-2 rounded-lg"
-            >
-              Sign Up
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Footer */}
-      <p className="absolute bottom-5 text-sm text-gray-400">
-        Built with ❤️ using RAG + Grok + Qdrant
-      </p>
-    </div>
+  <div className="flex gap-4">
+    <button
+      onClick={() => router.push("/dashboard")}
+      className="bg-blue-600 px-6 py-3 rounded-xl"
+    >
+      Get Started 🚀
+    </button>
+  </div>
+</div>
   );
 }

@@ -3,50 +3,50 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useRouter } from "next/navigation";
-import FileUpload from "./FileUpload"; // ✅ IMPORT
+import { useUser } from "@clerk/nextjs";
+import FileUpload from "./FileUpload";
 
 export default function ChatSidebar() {
   const [chats, setChats] = useState<any[]>([]);
   const router = useRouter();
+  const { user } = useUser();
 
   useEffect(() => {
     const fetchChats = async () => {
-      try {
-       const res = await api.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/chat/history`,
-        );
-        setChats(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+      const res = await api.get(`/chat/history`, {
+        headers: { "x-user-id": user?.id },
+      });
+      setChats(res.data);
     };
 
     fetchChats();
-  }, []);
+  }, [user]);
 
   return (
-    <div className="p-4 flex flex-col h-full">
-      
-      {/* 🔥 Upload Section */}
-      <div className="mb-4">
+    <div className="h-full flex flex-col p-4 gap-4">
+
+      {/* Title */}
+      <h1 className="text-xl font-semibold">📄 PDF Chat</h1>
+
+      {/* Upload */}
+      <div className="bg-gray-900 p-3 rounded-xl">
         <FileUpload />
       </div>
 
-      <h2 className="font-bold mb-4">Chats</h2>
-
+      {/* New Chat */}
       <button
-        className="mb-4 bg-black text-white px-3 py-1"
+        className="bg-blue-600 hover:bg-blue-700 py-2 rounded-lg"
         onClick={() => router.push("/dashboard")}
       >
         + New Chat
       </button>
 
-      {/* Chat List */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Chats */}
+      <div className="flex-1 overflow-y-auto space-y-2">
         {chats.map((chat) => (
           <div
             key={chat._id}
-            className="p-2 hover:bg-gray-200 cursor-pointer"
+            className="p-2 rounded-lg hover:bg-gray-800 cursor-pointer text-sm"
             onClick={() =>
               router.push(`/dashboard/chat?chatId=${chat._id}`)
             }

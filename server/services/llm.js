@@ -1,6 +1,6 @@
 import { grokClient } from "../config/grok.js";
 
-export const askGrok = async (context, query) => {
+export const askGrok = async (query, context) => {
   try {
     const res = await grokClient.post("/chat/completions", {
      model: "llama-3.1-8b-instant",

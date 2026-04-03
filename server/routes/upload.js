@@ -3,6 +3,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { pdfQueue } from "../config/queue.js";
+import Document from "../models/Document.js";
 
 const router = express.Router();
 
@@ -31,6 +32,12 @@ const upload = multer({ storage });
 // FIXED ROUTE
 router.post("/", upload.array("file"), async (req, res) => {
   try {
+    const userId = req.headers["x-user-id"];
+
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
     const files = req.files;
 
     if (!files || files.length === 0) {
@@ -39,14 +46,19 @@ router.post("/", upload.array("file"), async (req, res) => {
 
     for (const file of files) {
       const filePath = path.resolve(file.path);
-      const docId = Date.now().toString();
 
-      console.log("Saved file:", filePath);
+      // ✅ Create Document in DB
+      const doc = await Document.create({
+        userId,
+        fileName: file.originalname,
+        filePath,
+      });
 
+      // ✅ Add job to queue
       await pdfQueue.add("process-pdf", {
         filePath,
-        docId,
-        userId:"demo-user"
+        docId: doc._id,
+        userId, // 🔥 real userId
       });
     }
 

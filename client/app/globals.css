@@ -1,2 +1,20 @@
 @import "tailwindcss";
 
+body {
+  background-color: #020617;
+  color: #e2e8f0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease;
+}
