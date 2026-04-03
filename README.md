@@ -19,7 +19,7 @@ The app uses **Retrieval-Augmented Generation (RAG)** to provide accurate answer
 
 ## Demo Video
 
-[![Watch Demo](https://img.youtube.com/vi/_ZkGRNul-_4/0.jpg)](https://www.youtube.com/watch?v=_ZkGRNul-_4)
+[![Watch Demo](https://img.youtube.com/vi/43Ffn09pb34/0.jpg)](https://www.youtube.com/watch?v=43Ffn09pb34)
 
 ## Architecture
 
